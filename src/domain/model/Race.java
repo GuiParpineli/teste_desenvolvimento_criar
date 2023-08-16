@@ -31,7 +31,7 @@ public class Race implements Serializable {
                 " Código Piloto = '" + codPilot + "'" + '\n' +
                 " Nome Piloto = '" + pilotName + "'" + '\n' +
                 " Qtde Voltas Completadas = '" + lapNumber + "'" + '\n' +
-                " Tempo Total de Prova = '" + timeLap + "'" + '\n' +
+                " Tempo Total de Prova = '" + totalTime + "'" + '\n' +
                 '}';
     }
 

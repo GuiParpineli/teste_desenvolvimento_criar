@@ -13,5 +13,8 @@ public class Main {
 
         System.out.println("Lista com a melhor volta de cada piloto: ");
         System.out.println(runLaps.bestRacerLap(race.getRacerLaps()));
+
+        System.out.println("A  melhor volta da corrida foi: ");
+        System.out.println(runLaps.bestLap(race.getRacerLaps()));
     }
 }
