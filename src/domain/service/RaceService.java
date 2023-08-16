@@ -134,7 +134,13 @@ public class RaceService implements IRaceLap {
     }
 
     @Override
-    public List<String> timeAfterWinner(final List<Race> input) {
-        return null;
+    public HashMap<String, Long> timeAfterWinner(final List<Race> input) {
+        List<Race> raceList = podium(input);
+        LocalTime winnerTime = raceList.get(0).getTotalTime();
+        HashMap<String, Long> timeAfterWinList = new HashMap<>();
+        for (Race x : raceList) {
+            timeAfterWinList.put(x.getPilotName(), Duration.between(winnerTime, x.getTotalTime()).toMillis());
+        }
+        return timeAfterWinList;
     }
 }

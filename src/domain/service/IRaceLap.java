@@ -5,7 +5,6 @@ import domain.model.Race;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface IRaceLap {
     List<Race> podium(final List<Race> input);
@@ -16,5 +15,5 @@ public interface IRaceLap {
 
     HashMap<String, Double> averageSpeedRacerLap(final List<Race> input);
 
-    List<String> timeAfterWinner(final List<Race> input);
+    HashMap<String, Long> timeAfterWinner(final List<Race> input);
 }

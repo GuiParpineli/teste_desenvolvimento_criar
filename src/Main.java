@@ -23,5 +23,9 @@ public class Main {
         System.out.println("--------------------------");
         System.out.println("A velocidade media de cada corredor foi: ");
         System.out.println(runLaps.averageSpeedRacerLap(race.getRacerLaps()));
+
+        System.out.println("--------------------------");
+        System.out.println("O tempo que cada piloto levou após o vencedor foi: ");
+        System.out.println(runLaps.timeAfterWinner(race.getRacerLaps()));
     }
 }
