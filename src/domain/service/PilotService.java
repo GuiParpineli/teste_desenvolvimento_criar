@@ -26,6 +26,9 @@ public class PilotService implements IPilot {
         Collections.sort(input, Comparator.comparingLong(r -> r.getTimeLap().getTime()));
         for (int i = 0; i < input.size(); i++) {
             input.get(i).setPosition(i + 1);
+            if (input.get(i).getLapNumber() < 4) {
+                input.get(i).setPosition(input.size());
+            }
         }
         return input;
     }
