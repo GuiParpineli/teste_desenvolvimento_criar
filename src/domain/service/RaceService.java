@@ -58,27 +58,19 @@ public class RaceService implements IRaceLap {
     public HashMap<String, LocalTime> bestRacerLap(final List<Race> input) {
         List<Race> inputCopy = new ArrayList<>(input);
         HashMap<String, LocalTime> bestLap = new HashMap<>();
-        //Aqui uso um bubble sort para conferir o menor tempo e setto
+
+        //Aqui uso um bubble sort para conferir o menor tempo e seta-lo no hashmap
         for (int i = 0; i < inputCopy.size(); i++) {
             for (int j = i + 1; j < inputCopy.size(); j++) {
                 if (inputCopy.get(i).getCodPilot() == inputCopy.get(j).getCodPilot()) {
                     if (inputCopy.get(i).getTimeLap().isBefore(inputCopy.get(j).getTimeLap())) {
-                        inputCopy.get(i).setTimeLap(inputCopy.get(i).getTimeLap());
+                        bestLap.put(inputCopy.get(i).getPilotName(), inputCopy.get(i).getTimeLap());
                     } else {
-                        inputCopy.get(i).setTimeLap(inputCopy.get(j).getTimeLap());
+                        bestLap.put(inputCopy.get(i).getPilotName(), inputCopy.get(j).getTimeLap());
                     }
                     inputCopy.remove(j);
                     j--;
                 }
-            }
-        }
-
-        //obtendo o melhor tempo, so fazer um loop para exbir os dados de melhor forma em um hashmap
-        for (Race race : inputCopy) {
-            String racerName = race.getPilotName();
-            LocalTime lapTime = race.getTimeLap();
-            if (!bestLap.containsKey(racerName)) {
-                bestLap.put(racerName, lapTime);
             }
         }
 
@@ -90,20 +82,16 @@ public class RaceService implements IRaceLap {
     public HashMap<String, LocalTime> bestLap(final List<Race> input) {
 
         List<Race> inputCopy = new ArrayList<>(input);
+        LocalTime smallest = LocalTime.MAX;
         HashMap<String, LocalTime> bestLap = new HashMap<>();
 
-        //a logica e a mesma do anterior, mas aqui eu uso o Math.min pra achar o menor
-        for (int i = 0; i < inputCopy.size(); i++) {
-            for (int j = i + 1; j < inputCopy.size(); j++) {
-                if (inputCopy.get(i).getTimeLap().isBefore(inputCopy.get(j).getTimeLap())) {
-                    bestLap.put(inputCopy.get(i).getPilotName(), inputCopy.get(i).getTimeLap());
-                } else {
-                    bestLap.put(inputCopy.get(j).getPilotName(), inputCopy.get(j).getTimeLap());
-                }
-                inputCopy.remove(j);
-                j--;
+        for (Race lap : inputCopy) {
+            if (lap.getTimeLap().isBefore(smallest)) {
+                smallest = lap.getTimeLap();
+                bestLap.put(lap.getPilotName(), smallest);
             }
         }
+
         return bestLap;
     }
 
