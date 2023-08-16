@@ -29,7 +29,7 @@ public class Race implements Serializable {
 
     @Override
     public String toString() {
-        return "Piloto {" + '\n' +
+        return " {" + '\n' +
                 " Posição Chegada = '" + position + "'" + '\n' +
                 " Código Piloto = '" + codPilot + "'" + '\n' +
                 " Nome Piloto = '" + pilotName + "'" + '\n' +
