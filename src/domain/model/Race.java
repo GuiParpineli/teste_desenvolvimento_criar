@@ -14,6 +14,7 @@ public class Race implements Serializable {
     private Date timeLap;
     private double averageSpeed;
     private long totalTime;
+    private int position;
 
     public Race(String time, double codPilot, String pilotName, int lapNumber, String timeLap, double averageSpeed) throws ParseException {
         SimpleDateFormat inputFormat = new SimpleDateFormat("mm:ss.SSS");
@@ -28,14 +29,12 @@ public class Race implements Serializable {
 
     @Override
     public String toString() {
-        return "Race{" +
-                "time='" + time + '\'' +
-                ", codPilot=" + codPilot +
-                ", pilotName='" + pilotName + '\'' +
-                ", lapNumber=" + lapNumber +
-                ", timeLap=" + timeLap +
-                ", averageSpeed=" + averageSpeed +
-                ", totalTime=" + totalTime +
+        return "Piloto {" + '\n' +
+                " Posição Chegada = '" + position + "'" + '\n' +
+                " Código Piloto = '" + codPilot + "'" + '\n' +
+                " Nome Piloto = '" + pilotName + "'" + '\n' +
+                " Qtde Voltas Completadas = '" + lapNumber + "'" + '\n' +
+                " Tempo Total de Prova = '" + totalTime + "'" + '\n' +
                 '}';
     }
 
@@ -93,5 +92,13 @@ public class Race implements Serializable {
 
     public void setTotalTime(long totalTime) {
         this.totalTime = totalTime;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }
