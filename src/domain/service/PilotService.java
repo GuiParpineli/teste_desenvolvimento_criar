@@ -2,8 +2,7 @@ package domain.service;
 
 import domain.model.Race;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class PilotService implements IPilot {
 
@@ -19,6 +18,7 @@ public class PilotService implements IPilot {
                 }
             }
         }
+        Collections.sort(input, Comparator.comparingLong(r -> r.getTimeLap().getTime()));
         return input;
     }
 }
