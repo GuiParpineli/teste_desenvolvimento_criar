@@ -42,7 +42,7 @@ public class RaceFileReader implements IReader {
         }
     }
 
-    public List<Race> getCorridas() {
+    public List<Race> getRacerLaps() {
         return races;
     }
 }

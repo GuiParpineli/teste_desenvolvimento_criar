@@ -4,6 +4,6 @@ import domain.model.Race;
 
 import java.util.List;
 
-public interface IPilot {
+public interface IRaceLap {
     List<Race> podium(List<Race> input);
 }
