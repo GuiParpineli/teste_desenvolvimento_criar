@@ -2,7 +2,6 @@ package domain.model;
 
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.time.LocalTime;
 
 public class Race implements Serializable {
@@ -13,7 +12,7 @@ public class Race implements Serializable {
     private LocalTime timeLap;
     private double averageSpeed;
     private LocalTime totalTime = LocalTime.of(00,00,00,0000);
-    private int position;
+    private String position;
     private Double raceAverageSpeed = 0.0;
 
     public Race(String time, double codPilot, String pilotName, int lapNumber, LocalTime timeLap, double averageSpeed)  {
@@ -93,11 +92,11 @@ public class Race implements Serializable {
         this.totalTime = totalTime;
     }
 
-    public int getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 

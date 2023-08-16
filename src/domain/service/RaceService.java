@@ -46,9 +46,9 @@ public class RaceService implements IRaceLap {
         //Ele sendo ordenado, so colocar as posiçoes e caso as voltas forem menor que 4,
         // ele não completou a corrida entao jogo para ultimo lugar
         for (int i = 0; i < inputCopy.size(); i++) {
-            inputCopy.get(i).setPosition(i + 1);
+            inputCopy.get(i).setPosition(String.valueOf(i +1));
             if (inputCopy.get(i).getLapNumber() < 4) {
-                inputCopy.get(i).setPosition(inputCopy.size());
+                inputCopy.get(i).setPosition("Não Completou");
             }
         }
         return inputCopy;
