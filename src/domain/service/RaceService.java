@@ -114,13 +114,18 @@ public class RaceService implements IRaceLap {
         HashMap<String, Double> avgSpeed = new HashMap<>();
 
         for (int i = 0; i < inputCopy.size(); i++) {
+            inputCopy.get(i).setRaceAverageSpeed(inputCopy.get(i).getAverageSpeed());
             for (int j = i + 1; j < inputCopy.size(); j++) {
                 if (inputCopy.get(i).getCodPilot() == inputCopy.get(j).getCodPilot()) {
+                    inputCopy.get(i).setRaceAverageSpeed(
+                            (inputCopy.get(i).getRaceAverageSpeed() + inputCopy.get(j).getAverageSpeed())
+                    );
+                    inputCopy.remove(j);
+                    j--;
                     if (inputCopy.get(i).getLapNumber() > inputCopy.get(j).getLapNumber()) {
-                        inputCopy.get(i).setAverageSpeed(
-                                (inputCopy.get(i).getAverageSpeed() + inputCopy.get(j).getAverageSpeed()) / inputCopy.get(i).getLapNumber()
-                        );
-                        avgSpeed.put(inputCopy.get(i).getPilotName(), inputCopy.get(i).getAverageSpeed());
+                        avgSpeed.put(inputCopy.get(i).getPilotName(), inputCopy.get(i).getRaceAverageSpeed() / inputCopy.get(i).getLapNumber());
+                    } else {
+                        avgSpeed.put(inputCopy.get(i).getPilotName(), inputCopy.get(i).getRaceAverageSpeed() / inputCopy.get(j).getLapNumber());
                     }
                 }
             }

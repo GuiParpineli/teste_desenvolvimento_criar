@@ -14,6 +14,7 @@ public class Race implements Serializable {
     private double averageSpeed;
     private LocalTime totalTime = LocalTime.of(00,00,00,0000);
     private int position;
+    private Double raceAverageSpeed = 0.0;
 
     public Race(String time, double codPilot, String pilotName, int lapNumber, LocalTime timeLap, double averageSpeed)  {
         this.time = time;
@@ -98,5 +99,13 @@ public class Race implements Serializable {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public Double getRaceAverageSpeed() {
+        return raceAverageSpeed;
+    }
+
+    public void setRaceAverageSpeed(Double raceAverageSpeed) {
+        this.raceAverageSpeed = raceAverageSpeed;
     }
 }
