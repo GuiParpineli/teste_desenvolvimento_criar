@@ -2,10 +2,7 @@ package domain.service;
 
 import domain.model.Race;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class RaceService implements IRaceLap {
 
@@ -20,8 +17,8 @@ public class RaceService implements IRaceLap {
             for (int j = i + 1; j < input.size(); j++) {
                 if (Objects.equals(input.get(i).getCodPilot(), input.get(j).getCodPilot())) {
                     //primeiro eu somo o tempo total das voltas, para assim saber qual teve o menor tempo
-                    input.get(i).setTotalTime(input.get(i).getTimeLap().getTime()
-                            + input.get(j).getTimeLap().getTime());
+                    input.get(i).setTotalTime(input.get(i).getTimeLap()
+                            + input.get(j).getTimeLap());
                     //depois eu vejo qual o maior numero da volta e setto ele para assim definir o total de voltas,
                     if (input.get(i).getLapNumber() < input.get(j).getLapNumber()) {
                         input.get(i).setLapNumber(input.get(j).getLapNumber());
@@ -32,7 +29,7 @@ public class RaceService implements IRaceLap {
             }
         }
         //entao ordeno esse array baseando no tempo total  da corrida
-        Collections.sort(input, Comparator.comparingLong(r -> r.getTotalTime()));
+        Collections.sort(input, Comparator.comparingLong(r -> r.getTotalTime().longValue()));
         //Ele sendo ordenado, so colocar as posiçoes e caso as voltas forem menor que 4,
         // ele não completou a corrida entao jogo para ultimo lugar
         for (int i = 0; i < input.size(); i++) {
@@ -42,5 +39,51 @@ public class RaceService implements IRaceLap {
             }
         }
         return input;
+    }
+
+    @Override
+    public HashMap<String, Double> bestRacerLap(List<Race> input) {
+        HashMap<String, Double> bestLap = new HashMap();
+
+        //Aqui uso um bubble sort para conferir o menor tempo e setto
+        for (int i = 0; i < input.size(); i++) {
+            for (int j = i + 1; j < input.size(); j++) {
+                if (Objects.equals(input.get(i).getCodPilot(), input.get(j).getCodPilot())) {
+                    if (input.get(i).getTimeLap() < input.get(j).getTimeLap()) {
+                        input.get(i).setTimeLap(input.get(j).getTimeLap());
+                    }
+                    input.remove(j);
+                    j--;
+                }
+            }
+        }
+
+        //obtendo o melhor tempo, so fazer um loop para exbir os dados de melhor forma em um hashmap
+        for (Race race : input) {
+            String racerName = race.getPilotName();
+            Double lapTime = race.getTimeLap();
+
+            if (!bestLap.containsKey(racerName)) {
+                bestLap.put(racerName, lapTime);
+            }
+        }
+
+        return bestLap;
+    }
+
+
+    @Override
+    public String bestLap(List<Race> input) {
+        return null;
+    }
+
+    @Override
+    public List<String> averageSpeedRacerLap(List<Race> input) {
+        return null;
+    }
+
+    @Override
+    public List<String> timeAfterWinner(List<Race> input) {
+        return null;
     }
 }

@@ -3,27 +3,24 @@ package domain.model;
 
 import java.io.Serializable;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Race implements Serializable {
     private String time;
     private double codPilot;
     private String pilotName;
     private int lapNumber;
-    private Date timeLap;
+    private Double timeLap;
     private double averageSpeed;
-    private long totalTime;
+    private Double totalTime;
     private int position;
 
     public Race(String time, double codPilot, String pilotName, int lapNumber, String timeLap, double averageSpeed) throws ParseException {
-        SimpleDateFormat inputFormat = new SimpleDateFormat("mm:ss.SSS");
-        Date date = inputFormat.parse(timeLap);
+        String formattedTime = timeLap.replace(":", "");
         this.time = time;
         this.codPilot = codPilot;
         this.pilotName = pilotName;
         this.lapNumber = lapNumber;
-        this.timeLap = date;
+        this.timeLap = Double.parseDouble(formattedTime);
         this.averageSpeed = averageSpeed;
     }
 
@@ -34,7 +31,7 @@ public class Race implements Serializable {
                 " Código Piloto = '" + codPilot + "'" + '\n' +
                 " Nome Piloto = '" + pilotName + "'" + '\n' +
                 " Qtde Voltas Completadas = '" + lapNumber + "'" + '\n' +
-                " Tempo Total de Prova = '" + totalTime + "'" + '\n' +
+                " Tempo Total de Prova = '" + timeLap + "'" + '\n' +
                 '}';
     }
 
@@ -70,11 +67,11 @@ public class Race implements Serializable {
         this.lapNumber = lapNumber;
     }
 
-    public Date getTimeLap() {
+    public Double getTimeLap() {
         return timeLap;
     }
 
-    public void setTimeLap(Date timeLap) {
+    public void setTimeLap(Double timeLap) {
         this.timeLap = timeLap;
     }
 
@@ -86,11 +83,11 @@ public class Race implements Serializable {
         this.averageSpeed = averageSpeed;
     }
 
-    public long getTotalTime() {
+    public Double getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(long totalTime) {
+    public void setTotalTime(Double totalTime) {
         this.totalTime = totalTime;
     }
 
