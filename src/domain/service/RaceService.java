@@ -81,6 +81,10 @@ public class RaceService implements IRaceLap {
     @Override
     public HashMap<String, LocalTime> bestLap(final List<Race> input) {
 
+/*
+        neste caso, apenas preciso ver o menor tempo do array, entao posso instaciar o MAX so para conseguir
+         ir comparando os valores que vao sendo colocados no atributo
+*/
         List<Race> inputCopy = new ArrayList<>(input);
         LocalTime smallest = LocalTime.MAX;
         HashMap<String, LocalTime> bestLap = new HashMap<>();
@@ -100,7 +104,7 @@ public class RaceService implements IRaceLap {
 
         List<Race> inputCopy = new ArrayList<>(input);
         HashMap<String, Double> avgSpeed = new HashMap<>();
-
+        //praticamente mesmo algoritimo usado em casos acima, somente adaptando ao contexto
         for (int i = 0; i < inputCopy.size(); i++) {
             inputCopy.get(i).setRaceAverageSpeed(inputCopy.get(i).getAverageSpeed());
             for (int j = i + 1; j < inputCopy.size(); j++) {
@@ -123,6 +127,10 @@ public class RaceService implements IRaceLap {
 
     @Override
     public HashMap<String, Long> timeAfterWinner(final List<Race> input) {
+/*
+        Aqui é mais simples, apenas um loop no array checando a duração
+         entre o primeiro colocado(winnerTime) e o atual do array
+*/
         List<Race> raceList = podium(input);
         LocalTime winnerTime = raceList.get(0).getTotalTime();
         HashMap<String, Long> timeAfterWinList = new HashMap<>();
