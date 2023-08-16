@@ -39,7 +39,7 @@ public class RaceService implements IRaceLap {
             }
         }
         //entao ordeno esse array baseando no tempo total  da corrida
-        Collections.sort(inputCopy, Comparator.comparing(r -> r.getTotalTime()));
+        inputCopy.sort(Comparator.comparing(Race::getTotalTime));
         //Ele sendo ordenado, so colocar as posiçoes e caso as voltas forem menor que 4,
         // ele não completou a corrida entao jogo para ultimo lugar
         for (int i = 0; i < inputCopy.size(); i++) {
@@ -54,7 +54,7 @@ public class RaceService implements IRaceLap {
     @Override
     public HashMap<String, LocalTime> bestRacerLap(final List<Race> input) {
         List<Race> inputCopy = new ArrayList<>(input);
-        HashMap<String, LocalTime> bestLap = new HashMap();
+        HashMap<String, LocalTime> bestLap = new HashMap<>();
         //Aqui uso um bubble sort para conferir o menor tempo e setto
         for (int i = 0; i < inputCopy.size(); i++) {
             for (int j = i + 1; j < inputCopy.size(); j++) {
@@ -87,7 +87,7 @@ public class RaceService implements IRaceLap {
     public HashMap<String, LocalTime> bestLap(final List<Race> input) {
 
         List<Race> inputCopy = new ArrayList<>(input);
-        HashMap<String, LocalTime> bestLap = new HashMap();
+        HashMap<String, LocalTime> bestLap = new HashMap<>();
 
         //a logica e a mesma do anterior, mas aqui eu uso o Math.min pra achar o menor
         for (int i = 0; i < inputCopy.size(); i++) {
