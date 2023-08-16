@@ -3,24 +3,24 @@ package domain.model;
 
 import java.io.Serializable;
 import java.text.ParseException;
+import java.time.LocalTime;
 
 public class Race implements Serializable {
     private String time;
     private double codPilot;
     private String pilotName;
     private int lapNumber;
-    private Double timeLap;
+    private LocalTime timeLap;
     private double averageSpeed;
-    private Double totalTime;
+    private LocalTime totalTime;
     private int position;
 
-    public Race(String time, double codPilot, String pilotName, int lapNumber, String timeLap, double averageSpeed) throws ParseException {
-        String formattedTime = timeLap.replace(":", "");
+    public Race(String time, double codPilot, String pilotName, int lapNumber, LocalTime timeLap, double averageSpeed) throws ParseException {
         this.time = time;
         this.codPilot = codPilot;
         this.pilotName = pilotName;
         this.lapNumber = lapNumber;
-        this.timeLap = Double.parseDouble(formattedTime);
+        this.timeLap = timeLap;
         this.averageSpeed = averageSpeed;
     }
 
@@ -67,11 +67,11 @@ public class Race implements Serializable {
         this.lapNumber = lapNumber;
     }
 
-    public Double getTimeLap() {
+    public LocalTime getTimeLap() {
         return timeLap;
     }
 
-    public void setTimeLap(Double timeLap) {
+    public void setTimeLap(LocalTime timeLap) {
         this.timeLap = timeLap;
     }
 
@@ -83,11 +83,11 @@ public class Race implements Serializable {
         this.averageSpeed = averageSpeed;
     }
 
-    public Double getTotalTime() {
+    public LocalTime getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(Double totalTime) {
+    public void setTotalTime(LocalTime totalTime) {
         this.totalTime = totalTime;
     }
 

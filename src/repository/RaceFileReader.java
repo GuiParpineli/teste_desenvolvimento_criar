@@ -5,6 +5,7 @@ import domain.model.Race;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,10 +29,11 @@ public class RaceFileReader implements IReader {
                 final int codPilot = Integer.parseInt(split[1].substring(0, 3));
                 final String pilotName = split[3];
                 final int lapNumber = Integer.parseInt(split[4]);
-                final String timeLap = split[5];
+                final String timeLap = "00:0" + split[5];
+
                 final double averageSpeed = Double.parseDouble(split[6]
                         .replace(",", "."));
-                races.add(new Race(time, codPilot, pilotName, lapNumber, timeLap, averageSpeed));
+                races.add(new Race(time, codPilot, pilotName, lapNumber, LocalTime.parse(timeLap.trim()), averageSpeed));
             }
             scanner.close();
         } catch (FileNotFoundException e) {
