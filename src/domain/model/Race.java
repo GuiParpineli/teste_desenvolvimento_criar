@@ -2,33 +2,40 @@ package domain.model;
 
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Race implements Serializable {
     private String time;
     private double codPilot;
     private String pilotName;
     private int lapNumber;
-    private String timeLap;
+    private Date timeLap;
     private double averageSpeed;
+    private long totalTime;
 
-    public Race(String time, double codPilot, String pilotName, int lapNumber, String timeLap, double averageSpeed) {
+    public Race(String time, double codPilot, String pilotName, int lapNumber, String timeLap, double averageSpeed) throws ParseException {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("mm:ss.SSS");
+        Date date = inputFormat.parse(timeLap);
         this.time = time;
         this.codPilot = codPilot;
         this.pilotName = pilotName;
         this.lapNumber = lapNumber;
-        this.timeLap = timeLap;
+        this.timeLap = date;
         this.averageSpeed = averageSpeed;
     }
 
     @Override
     public String toString() {
         return "Race{" +
-                "tempo='" + time + '\'' +
-                ", codPiloto=" + codPilot +
-                ", nomePiloto='" + pilotName + '\'' +
-                ", numVolta=" + lapNumber +
-                ", TempoVolta='" + timeLap + '\'' +
-                ", velocidadeMedia=" + averageSpeed +
+                "time='" + time + '\'' +
+                ", codPilot=" + codPilot +
+                ", pilotName='" + pilotName + '\'' +
+                ", lapNumber=" + lapNumber +
+                ", timeLap=" + timeLap +
+                ", averageSpeed=" + averageSpeed +
+                ", totalTime=" + totalTime +
                 '}';
     }
 
@@ -64,11 +71,11 @@ public class Race implements Serializable {
         this.lapNumber = lapNumber;
     }
 
-    public String getTimeLap() {
+    public Date getTimeLap() {
         return timeLap;
     }
 
-    public void setTimeLap(String timeLap) {
+    public void setTimeLap(Date timeLap) {
         this.timeLap = timeLap;
     }
 
@@ -78,5 +85,13 @@ public class Race implements Serializable {
 
     public void setAverageSpeed(double averageSpeed) {
         this.averageSpeed = averageSpeed;
+    }
+
+    public long getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(long totalTime) {
+        this.totalTime = totalTime;
     }
 }

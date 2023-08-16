@@ -4,6 +4,7 @@ import domain.model.Race;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,6 +37,8 @@ public class RaceFileReader implements IReader {
         } catch (FileNotFoundException e) {
             System.out.println("Error reading file.");
             e.printStackTrace();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 
