@@ -14,7 +14,7 @@ public interface IRaceLap {
 
     HashMap<String, LocalTime> bestLap(final List<Race> input);
 
-    List<String> averageSpeedRacerLap(final List<Race> input);
+    HashMap<String, Double> averageSpeedRacerLap(final List<Race> input);
 
     List<String> timeAfterWinner(final List<Race> input);
 }

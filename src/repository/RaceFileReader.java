@@ -30,7 +30,6 @@ public class RaceFileReader implements IReader {
                 final String pilotName = split[3];
                 final int lapNumber = Integer.parseInt(split[4]);
                 final String timeLap = "00:0" + split[5];
-
                 final double averageSpeed = Double.parseDouble(split[6]
                         .replace(",", "."));
                 races.add(new Race(time, codPilot, pilotName, lapNumber, LocalTime.parse(timeLap.trim()), averageSpeed));
@@ -39,8 +38,6 @@ public class RaceFileReader implements IReader {
         } catch (FileNotFoundException e) {
             System.out.println("Error reading file.");
             e.printStackTrace();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
     }
 

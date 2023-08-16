@@ -12,10 +12,10 @@ public class Race implements Serializable {
     private int lapNumber;
     private LocalTime timeLap;
     private double averageSpeed;
-    private LocalTime totalTime;
+    private LocalTime totalTime = LocalTime.of(00,00,00,0000);
     private int position;
 
-    public Race(String time, double codPilot, String pilotName, int lapNumber, LocalTime timeLap, double averageSpeed) throws ParseException {
+    public Race(String time, double codPilot, String pilotName, int lapNumber, LocalTime timeLap, double averageSpeed)  {
         this.time = time;
         this.codPilot = codPilot;
         this.pilotName = pilotName;
@@ -82,6 +82,7 @@ public class Race implements Serializable {
     public void setAverageSpeed(double averageSpeed) {
         this.averageSpeed = averageSpeed;
     }
+
 
     public LocalTime getTotalTime() {
         return totalTime;

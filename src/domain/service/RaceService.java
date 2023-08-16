@@ -2,6 +2,7 @@ package domain.service;
 
 import domain.model.Race;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -18,11 +19,13 @@ public class RaceService implements IRaceLap {
         List<Race> inputCopy = new ArrayList<>(input);
 
         for (int i = 0; i < inputCopy.size(); i++) {
+            inputCopy.get(i).setTotalTime(inputCopy.get(i).getTimeLap());
             for (int j = i + 1; j < inputCopy.size(); j++) {
-                if (Objects.equals(inputCopy.get(i).getCodPilot(), inputCopy.get(j).getCodPilot())) {
+                if (inputCopy.get(i).getCodPilot() == inputCopy.get(j).getCodPilot()) {
                     //primeiro eu somo o tempo total das voltas, para assim saber qual teve o menor tempo
+
                     inputCopy.get(i).setTotalTime(
-                            inputCopy.get(i).getTimeLap()
+                            inputCopy.get(i).getTotalTime()
                                     .plusHours(inputCopy.get(j).getTimeLap().getHour())
                                     .plusMinutes(inputCopy.get(j).getTimeLap().getMinute())
                                     .plusSeconds(inputCopy.get(j).getTimeLap().getSecond())
@@ -58,7 +61,7 @@ public class RaceService implements IRaceLap {
         //Aqui uso um bubble sort para conferir o menor tempo e setto
         for (int i = 0; i < inputCopy.size(); i++) {
             for (int j = i + 1; j < inputCopy.size(); j++) {
-                if (Objects.equals(inputCopy.get(i).getCodPilot(), inputCopy.get(j).getCodPilot())) {
+                if (inputCopy.get(i).getCodPilot() == inputCopy.get(j).getCodPilot()) {
                     if (inputCopy.get(i).getTimeLap().isBefore(inputCopy.get(j).getTimeLap())) {
                         inputCopy.get(i).setTimeLap(inputCopy.get(i).getTimeLap());
                     } else {
@@ -105,8 +108,24 @@ public class RaceService implements IRaceLap {
     }
 
     @Override
-    public List<String> averageSpeedRacerLap(final List<Race> input) {
-        return null;
+    public HashMap<String, Double> averageSpeedRacerLap(final List<Race> input) {
+
+        List<Race> inputCopy = new ArrayList<>(input);
+        HashMap<String, Double> avgSpeed = new HashMap<>();
+
+        for (int i = 0; i < inputCopy.size(); i++) {
+            for (int j = i + 1; j < inputCopy.size(); j++) {
+                if (inputCopy.get(i).getCodPilot() == inputCopy.get(j).getCodPilot()) {
+                    if (inputCopy.get(i).getLapNumber() > inputCopy.get(j).getLapNumber()) {
+                        inputCopy.get(i).setAverageSpeed(
+                                (inputCopy.get(i).getAverageSpeed() + inputCopy.get(j).getAverageSpeed()) / inputCopy.get(i).getLapNumber()
+                        );
+                        avgSpeed.put(inputCopy.get(i).getPilotName(), inputCopy.get(i).getAverageSpeed());
+                    }
+                }
+            }
+        }
+        return avgSpeed;
     }
 
     @Override
